@@ -1,0 +1,10 @@
+{
+    "admin": {
+        "username": "admin",
+        "hashed_password": "fakehashed"
+    },
+    "alice": {
+        "username": "alice",
+        "hashed_password": "fakehashedsecret2"
+    }
+}
