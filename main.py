@@ -2,11 +2,15 @@ from fastapi import FastAPI, Depends
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.templating import Jinja2Templates
+from starlette.requests import Request
 from pydantic import BaseModel, Field
 from typing import Annotated
 import json
 
 app = FastAPI()
+
+templates = Jinja2Templates(directory="templates")
 
 SECRET_KEY = "19109197bd5e7c289b92b2b355083ea26c71dee2085ceccc19308a7291b2ea06"
 ALGORITHM = "HS256"
@@ -75,9 +79,9 @@ async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
     return {"access_token" : access_token, "token_type" : "bearer"}
 
 @app.get("/")
-def get_all_books():
+def get_all_books(request: Request):
     library = load_data()
-    return {"message": "Привіт, це менеджер бібліотеки!"}
+    return templates.TemplateResponse("index.html", {"request": request, "library": library})
 
 @app.post("/books/new")
 def add_book(book: Book, token: Annotated[str, Depends(oauth2_scheme)]):
@@ -89,7 +93,7 @@ def add_book(book: Book, token: Annotated[str, Depends(oauth2_scheme)]):
     return library
 
 @app.put("/books/update")
-def update_book(book: Book):
+def update_book(book: Book, token: Annotated[str, Depends(oauth2_scheme)]):
     library = load_data()
     if book .title in library:
         library[book.title] = book
@@ -99,7 +103,7 @@ def update_book(book: Book):
     
 
 @app.delete("/books/delete")
-def delete_book(author:str, title:str):
+def delete_book(author:str, title:str, token: Annotated[str, Depends(oauth2_scheme)]):
     library = load_data()
 
     if author in library:
