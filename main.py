@@ -4,12 +4,14 @@ from datetime import datetime, timedelta
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from fastapi.templating import Jinja2Templates
 from starlette.requests import Request
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from typing import Annotated
 import json
 
 app = FastAPI()
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 SECRET_KEY = "19109197bd5e7c289b92b2b355083ea26c71dee2085ceccc19308a7291b2ea06"
@@ -28,6 +30,10 @@ class Book(BaseModel):
     title:str = Field(..., title="Назва книги", min_length= 2, max_length=100)
     author:str = Field(..., title="author", min_length= 2, max_length=100)
     pages:int = Field(..., title="amount of pages", gt=10)
+    image:str = Field(default="static/img/book.jpg",
+        title="Image",
+        description="![Image Preview](static/img/book.jpg)",
+        example="static/img/book.jpg")
 
 
 def load_data(filename = "library.json"):

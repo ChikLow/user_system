@@ -3,41 +3,54 @@
         {
             "title": "11123string",
             "author": "string",
-            "pages": 11
+            "pages": 11,
+            "image": "static/img/book.jpg"
         },
         {
             "title": "13232321123string",
             "author": "string",
-            "pages": 11
+            "pages": 11,
+            "image": "static/img/book.jpg"
         },
         {
             "title": "string",
             "author": "string",
-            "pages": 11
+            "pages": 11,
+            "image": "static/img/book.jpg"
         },
         {
             "title": "string",
             "author": "string",
-            "pages": 11
+            "pages": 11,
+            "image": "static/img/book.jpg"
+        },
+        {
+            "title": "string",
+            "author": "string",
+            "pages": 11,
+            "image": "static/img/book.jpg"
         }
     ],
     "pig": [
         {
             "title": "nick",
             "author": "pig",
-            "pages": 112
+            "pages": 112,
+            "image": "static/img/book.jpg"
         },
         {
             "title": "nick",
             "author": "pig",
-            "pages": 112
+            "pages": 112,
+            "image": "static/img/book.jpg"
         }
     ],
-    "niggeR": [
+    "bober": [
         {
-            "title": "niggas",
-            "author": "niggeR",
-            "pages": 666
+            "title": "bobers",
+            "author": "bober",
+            "pages": 666,
+            "image": "static/img/book.jpg"
         }
     ]
 }
